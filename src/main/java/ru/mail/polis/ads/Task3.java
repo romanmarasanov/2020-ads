@@ -10,13 +10,31 @@ import java.util.StringTokenizer;
 /**
  * Problem solution template.
  */
-public final class SolveTemplate {
-    private SolveTemplate() {
+public final class Task3 {
+    private Task3() {
         // Should not be instantiated
     }
 
     private static void solve(final FastScanner in, final PrintWriter out) {
-        // Write me
+        String expression = in.next();
+        int openParenthesesCounter = 0;
+        int length = expression.length();
+        for (int i = 0; i < length; i++){
+            if (expression.charAt(i) == '('){
+                openParenthesesCounter++;
+            } else {
+                openParenthesesCounter--;
+            }
+            if (openParenthesesCounter < 0){
+                out.print("NO");
+                return;
+            }
+        }
+        if (openParenthesesCounter == 0){
+            out.print("YES");
+        } else {
+            out.print("NO");
+        }
     }
 
     private static class FastScanner {
