@@ -1,4 +1,4 @@
-package ru.mail.polis.ads;
+package ru.mail.polis.ads.homework1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
