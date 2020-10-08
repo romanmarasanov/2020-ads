@@ -27,20 +27,6 @@ public final class Task1 {
             out.print(number + " ");
         }
     }
-/*
-useless for this task
- */
-//    private static void bubbleSort(int[] array, int length){
-//        for (int i = 0; i < length - 1; i++){
-//            for (int j = 0; j < length - 1 - i; j++){
-//                if (array[j] > array[j + 1]){
-//                    int temp = array[j];
-//                    array[j] = array[j + 1];
-//                    array[j + 1] = temp;
-//                }
-//            }
-//        }
-//    }
 
     public static void mergeSort(int[] a, int n) {
         if (n < 2) {
