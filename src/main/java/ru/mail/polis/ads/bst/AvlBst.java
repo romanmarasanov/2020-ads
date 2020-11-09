@@ -9,7 +9,7 @@ public class AvlBst<Key extends Comparable<Key>, Value>
         implements Bst<Key, Value> {
 
     private int size;
-    private final Node root;
+    private Node root;
 
     private class Node {
         Key key;
@@ -27,7 +27,6 @@ public class AvlBst<Key extends Comparable<Key>, Value>
 
     AvlBst(){
         size = 0;
-        root = null;
     }
 
     @Override
@@ -45,28 +44,30 @@ public class AvlBst<Key extends Comparable<Key>, Value>
 
     @Override
     public void put(@NotNull Key key, @NotNull Value value) {
-        put(root, key, value);
+        root = put(root, key, value);
     }
 
     private Node put(Node x, Key key, Value value){
         if (x == null) {
             size++;
-            return new Node(key, value, 1);
+            x = new Node(key, value, 1);
+            return x;
         }
         if (key.compareTo(x.key) < 0) x.left = put(x.left, key, value);
         else if (key.compareTo(x.key) > 0) x.right = put(x.right, key, value);
         else x.value = value;
         fixHeight(x);
-//        x = balance(x);
+        x = balance(x);
         return x;
     }
 
     @Override
     public Value remove(@NotNull Key key) {
-        Node res = delete(root, key);
+        Node res = get(root, key);
         if (res == null) return null;
         else {
             size--;
+            root = delete(root, key);
             return res.value;
         }
     }
