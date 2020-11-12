@@ -37,8 +37,9 @@ public class AvlBst<Key extends Comparable<Key>, Value>
 
     private Node get(Node x, Key key){
         if (x == null) return null;
-        if (key.compareTo(x.key) < 0) return get(x.left, key);
-        if (key.compareTo(x.key) > 0) return get(x.right, key);
+        int compareResult = key.compareTo(x.key);
+        if (compareResult < 0) return get(x.left, key);
+        if (compareResult > 0) return get(x.right, key);
         return x;
     }
 
@@ -53,8 +54,9 @@ public class AvlBst<Key extends Comparable<Key>, Value>
             x = new Node(key, value, 1);
             return x;
         }
-        if (key.compareTo(x.key) < 0) x.left = put(x.left, key, value);
-        else if (key.compareTo(x.key) > 0) x.right = put(x.right, key, value);
+        int compareResult = key.compareTo(x.key);
+        if (compareResult < 0) x.left = put(x.left, key, value);
+        else if (compareResult > 0) x.right = put(x.right, key, value);
         else x.value = value;
         fixHeight(x);
         x = balance(x);
@@ -74,8 +76,9 @@ public class AvlBst<Key extends Comparable<Key>, Value>
 
     private Node delete(Node x, Key key){
         if (x == null) return null;
-        if (key.compareTo(x.key) < 0) x.left = delete(x.left, key);
-        else if (key.compareTo(x.key) > 0) x.right = delete(x.right, key);
+        int compareResult = key.compareTo(x.key);
+        if (compareResult < 0) x.left = delete(x.left, key);
+        else if (compareResult > 0) x.right = delete(x.right, key);
         else x = innerDelete(x);
         return x;
     }
@@ -150,16 +153,18 @@ public class AvlBst<Key extends Comparable<Key>, Value>
 
     private Node floor(Node x, Key key) {
         if (x == null) return null;
-        if (key.compareTo(x.key) == 0) return x;
-        if (key.compareTo(x.key) < 0) return floor(x.left, key);
+        int compareResult = key.compareTo(x.key);
+        if (compareResult == 0) return x;
+        if (compareResult < 0) return floor(x.left, key);
         Node right = floor(x.right, key);
         return right == null ? x : right;
     }
 
     private Node ceil(Node x, Key key) {
         if (x == null) return null;
-        if (key == x.key) return x;
-        if (key.compareTo(x.key) > 0) return ceil(x.right, key);
+        int compareResult = key.compareTo(x.key);
+        if (compareResult == 0) return x;
+        if (compareResult > 0) return ceil(x.right, key);
         Node left = ceil(x.left, key);
         return left == null ? x : left;
     }
